@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your City 🏙</title>
+    <style>
+        button{
+            font-size: large;
+            background: linear-gradient(violet,blueviolet,rgb(62, 62, 250));
+            border-radius: 5px;
+            border: 3px solid black;
+            color: white;
+        }
+        @media screen and (max-width:1600px){
+            .container{
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+            img{
+                width: 90%;
+                height: 24%;
+                z-index: -1;
+            }
+            button{
+                z-index: 1;
+            }
+        }
+    </style>
+    <script>
+        function setCookie(cname,cvalue,exdays) {
+   var d = new Date();
+   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+   var expires = "expires=" + d.toGMTString();
+   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+ }
+ 
+ function getCookie(cname) {
+   var name = cname + "=";
+   var decodedCookie = decodeURIComponent(document.cookie);
+   var ca = decodedCookie.split(';');
+   for(var i = 0; i < ca.length; i++) {
+     var c = ca[i];
+     while (c.charAt(0) == ' ') {
+       c = c.substring(1);
+     }
+     if (c.indexOf(name) == 0) {
+       return c.substring(name.length, c.length);
+     }
+   }
+   return "";
+ }
+ song = new Audio(getCookie('music'))
+song.play();
+song.loop=true;
+   </script>
+</head>
+<body>
+
+
+
+<div class="container">
+     <button style="float:left;clear: all;margin-bottom: -30px;border: none;font-size: x-large;background: none;"><a href="index.html" style="text-decoration:none;"> 🔙</a></button>
+
+    <div>
+    <img src="inf.png">
+<br><button> <a href="infrastructure.html" style="text-decoration: none;color: white;">Infrastructure 📝</a></button>
+</div>
+<Br>
+<div>
+    <img src="https://cdn-live.duelz.com/cdn/logo-diamond-mine-extra-gold-all-action-17632.png">
+<br><button><a href="resources.html" style="text-decoration: none;color: white;"> Resources 🌟</a></button>
+</div>
+<br>
+<div>
+    <img src="https://www.kttn.com/wp-content/uploads/2018/08/Civil-War.jpg">
+<br><button> <a href="wars.html" style="text-decoration: none;color: white;">Wars ⚔</a></button>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Smart city 🏙</title>
+      <style>
+         .bing{
+         width: 200px;
+         height: 150px;
+         border: 10px double black;
+         }
+         #infobox h1{
+         margin-top: -7.5px;
+         margin-bottom: -7.5px;
+         }
+         #nameshow{
+         margin-top: -20px;
+         margin-bottom: -10px;
+         text-align: center;
+         align-self: center;
+         }
+         .start{
+         width: 70%;
+         height: 35%;
+         animation:changel 7.5s linear infinite;
+         }
+         .contain{
+         width: 100%;
+         height: 100%;
+         align-items: center;
+         text-align: center;
+         }
+         @keyframes changel {
+         0%,100%{
+         border:20px double dodgerblue;
+         box-shadow: 10px 10px 10px blue;
+         }
+         25%{
+         border:20px double lime;
+         box-shadow: 10px 10px 10px green;
+         }
+         50%{
+         border:20px double gold;
+         box-shadow: 10px 10px 10px orange;
+         }
+         75%{
+         border:20px double rgb(235, 44, 82);
+         box-shadow: 10px 10px 10px red;
+         }
+         }
+         .options button{
+         font-size: large;
+         background: linear-gradient(violet,blueviolet,rgb(62, 62, 250));
+         border-radius: 5px;
+         border: 3px solid black;
+         color: white;
+         }
+         @media screen and (max-width:1600px){
+         .options{
+         width: 100%;
+         height: 100%;
+         text-align: center;
+         }
+         .options img{
+         width: 90%;
+         height: 24%;
+         z-index: -1;
+         }
+         .options button{
+         z-index: 1;
+         }
+         }
+         .buttons button{
+         font-size: 25px;
+         color: white;
+         font-weight: 700;
+         background: rgb(155, 0, 155);
+         width: 225px;
+         height: 50px;
+         border: 5px solid white;
+         border-radius: 15px;
+         }
+         #toggle_checkbox
+         {
+         display: none;
+         }
+         .settings label
+         {
+         display: block;
+         position: absolute;
+         right: 0;
+         left: 0;
+         width: 120px;
+         height: 40px;
+         margin: 10px auto;
+         background-color: #77b5fe;
+         border-radius: 56px;
+         transform: translateY(-50%);
+         cursor: pointer;
+         transition: 0.3s ease background-color;
+         overflow: hidden;
+         }
+         #star
+         {
+         position: absolute;
+         top: 7px;
+         left:10px;
+         width: 20px;
+         height: 0px;
+         background-color: yellow;
+         transform: scale(1);
+         transition: 0.3s ease top, 0.3s ease left, 0.3s ease transform, 0.3s ease background-color;
+         z-index: 1;
+         }
+         #star-1
+         {
+         position: relative;
+         }
+         #star-2
+         {
+         position: absolute;
+         transform: rotateZ(36deg);
+         }
+         .star
+         {
+         top: 0;
+         left: -7px;
+         font-size: 45px;
+         line-height: 28px;
+         color: #fafd0f;
+         transition: 0.3s ease color;
+         }
+         #moon
+         {
+         position: absolute;
+         bottom: -52px;
+         right: 10px;
+         width: 32.5px;
+         height: 30px;
+         background-color: #fff;
+         border-radius: 50%;
+         transition: 0.3s ease bottom;
+         }
+         #moon:before
+         {
+         content: "";
+         position: absolute;
+         top: -7px;
+         left: -17px;
+         width: 40px;
+         height: 40px;
+         background-color:#03a9f4;
+         border-radius: 50%;
+         transition: 0.3s ease background-color;
+         }
+         #toggle_checkbox:checked + label
+         {
+         background-color: #000;
+         }
+         #toggle_checkbox:checked + label #star
+         {
+         top: 7.5px;
+         left: 75px;
+         transform: scale(0.5);
+         background-color: yellow;
+         }
+         #toggle_checkbox:checked + label .star
+         {
+         color: gold;
+         }
+         #toggle_checkbox:checked + label #moon
+         {
+         bottom: 8px;
+         }
+         #toggle_checkbox:checked + label #moon:before
+         {
+         background-color: #000;
+         }
+      </style>
+      <script>
+         function setCookie(cname,cvalue,exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays*24*60*60*1000));
+         var expires = "expires=" + d.toGMTString();
+         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+         }
+         
+         function setCookieS(cname,cvalue,exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays*1000));
+         var expires = "expires=" + d.toGMTString();
+         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+         }
+         
+         function setCookieM(cname,cvalue,exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays*1000*60));
+         var expires = "expires=" + d.toGMTString();
+         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+         }
+         
+         function setCookieH(cname,cvalue,exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays*1000*3600));
+         var expires = "expires=" + d.toGMTString();
+         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+         }
+         
+         function getCookie(cname) {
+         var name = cname + "=";
+         var decodedCookie = decodeURIComponent(document.cookie);
+         var ca = decodedCookie.split(';');
+         for(var i = 0; i < ca.length; i++) {
+         var c = ca[i];
+         while (c.charAt(0) == ' ') {
+         c = c.substring(1);
+         }
+         if (c.indexOf(name) == 0) {
+         return c.substring(name.length, c.length);
+         }
+         }
+         return "";
+         }
+         song = new Audio(getCookie('music'))
+         song.play();
+         song.loop=true;
+      </script>
+   </head>
+   <body
+      onload="
+      document.getElementById('ucoins').innerHTML+=getCookie('Coins')
+      document.getElementById('ugems').innerHTML+=getCookie('Gems')
+      document.getElementById('curbuild').innerHTML=getCookie('Current_Build')
+      "
+      >
+      <div id="infobox" style="display: none;border:10px solid rgb(0, 0, 0);border-radius:10px;padding:5px;box-shadow:5px 5px 10px grey;background-color: white;height: 95%;width: 95%;margin:-5px;">
+         <img src="" id="infi" width="100%" height="40%" style="margin-bottom: 10px;">
+         <h1 id="inft"></H1>
+         <hr>
+         <h3 id="infa"></h3>
+         <h3 id="infc"></h3>
+         <button style="float:left;margin-top:40px;border: none;font-size: x-large;background: none;" onclick="
+            document.getElementById('infra').style.display='block';
+            document.getElementById('infobox').style.display='none';">🔙</button>
+      </div>
+      <div id="NoBuild" style="display: none;text-align: center;">
+         <img src="" alt="" id="BuildImage" style="width: 95%;;height: 40%;"><hr><hr>
+         <h1>You Have just built a <label id="curbuild"></label>, You Can Build a new building in <label id="curbuildt"></label>.</h1>
+         <button style="float:left;clear: all;margin-bottom: -30px;border: none;font-size: x-large;background: none;" onclick="
+            document.getElementById('NoBuild').style.display='none';
+            document.getElementById('options').style.display='block';">🔙</button>
+      </div>
+      <div class="options" id="options" style="display: none;">
+         <button style="float:left;clear: all;margin-bottom: -30px;border: none;font-size: x-large;background: none;" onclick="
+            document.getElementById('main').style.display='block';
+            document.getElementById('options').style.display='none';">🔙</button>
+         <div>
+            <img src="inf.png">
+            <br><button onclick="
+               if(((getCookie('Current_BT')-new Date().getTime())/1000)>0){
+               document.getElementById('options').style.display='none';
+               document.getElementById('NoBuild').style.display='block';
+               }
+               else{
+               document.getElementById('infra').style.display='block';
+               document.getElementById('options').style.display='none';
+               }"
+               >Infrastructure 📝</button>
+         </div>
+         <Br>
+         <div>
+            <img src="https://cdn-live.duelz.com/cdn/logo-diamond-mine-extra-gold-all-action-17632.png">
+            <br><button onclick="
+               document.getElementById('resources').style.display='block';
+               document.getElementById('options').style.display='none';"
+               > Resources 🌟</button>
+         </div>
+         <br>
+         <div>
+            <img src="https://www.kttn.com/wp-content/uploads/2018/08/Civil-War.jpg">
+            <br><button> <a href="wars.html" style="text-decoration: none;color: white;">Wars ⚔</a></button>
+         </div>
+      </div>
+      <div id="settings" style="display: none;text-align: center;">
+         <h1 style="font-size: 50px;">Settings</h1>
+         <h1>Music:</h1>
+         <select id="music" 
+            onchange="
+            if(song!=''){
+            song.pause()
+            }
+            else{
+            }
+            music=document.getElementById('music').value+'.mp3'
+            setCookie('music',music)
+            song = new Audio(getCookie('music'))
+            song.play();
+            song.loop=true;
+            " 
+            style="border: 2.5px solid black;">
+            <option >None</option>
+            <option >Cowboy</option>
+            <option >City Centre</option>
+            <option >Road</option>
+            <option >Birds</option>
+            <option >Sea</option>
+            <option >Rain</option>
+         </select>
+         <button style="font-size:40px;position: absolute;bottom: 10px;left:20px;background:none;border: none;" onclick="
+            document.getElementById('settings').style.display='none';
+            document.getElementById('main').style.display='block';">🔙</button>
+      </div>
+      <div id="infra" style="display: none;">
+         <div style="position: fixed;background-color: white;width: 100%;margin-top: -100px;"><label id ="ucoins" style="font-weight: 700; color:rgb(255, 187, 0);font-size: 25px;" >Coins: </label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=40><bR><br><label id="ugems" style="color:lime;font-size: 25px;font-weight: 700;">Gems:</label><img style="margin-bottom: -7.5px;" src="https://pics.clipartpng.com/midle/Emerald_Gem_PNG_Clipart-791.png" width=45></div>
+         <div style="margin-top: 100px;">
+            <h2>Buildings, You can build:</h2>
+            <button style="float:right;background-color: red;border:3px solid black;color: white;font-size: 25px;width: 50px;width: 35px;border-radius: 50%;"
+               onclick="
+               document.getElementById('infra').style.display='none'
+               document.getElementById('infi').setAttribute('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR10GeCbuJF_PsJRj-VintNE-d8BxHvkehHrQ&usqp=CAU')
+               document.getElementById('inft').innerHTML='House'
+               document.getElementById('infa').innerHTML='This is a place, where your workers rest.<bR>Build more of these to increase your worker population.'
+               document.getElementById('infc').innerHTML='1 House = 5 Workers'
+               document.getElementById('infobox').style.display='block'">i</button>
+            <div class="huts"
+               onclick="
+               buildIt('House',1000,'coins',10,'s')
+               ">
+               <label style="font-size: 22.5;font-weight: 700;">House</label><br>
+               <img class="bing" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR10GeCbuJF_PsJRj-VintNE-d8BxHvkehHrQ&usqp=CAU">
+               <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 1000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10s</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+            </div>
+            <br>
+            <button style="float:right;background-color: red;border:3px solid black;color: white;font-size: 25px;width: 50px;width: 35px;border-radius: 50%;"
+               onclick="
+               document.getElementById('infra').style.display='none'
+               document.getElementById('infi').setAttribute('src','https://www.seekpng.com/png/full/23-239023_get-started-with-eschool-plus-app-try-free.png')
+               document.getElementById('inft').innerHTML='School'
+               document.getElementById('infa').innerHTML='This is a place, where students study.<bR>Build more of these to increase your skilled population.'
+               document.getElementById('infc').innerHTML='1 School = 100 students'
+               document.getElementById('infobox').style.display='block'">i</button>
+            <div class="schools"
+               onclick="
+               buildIt('School',2500,'coins',1,'m')
+               ">
+               <label style="font-size: 22.5;font-weight: 700;">School</label><br>
+               <img class="bing" src="https://www.seekpng.com/png/full/23-239023_get-started-with-eschool-plus-app-try-free.png">
+               <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 2500</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:1m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+            </div>
+            <br>
+            <button style="float:right;background-color: red;border:3px solid black;color: white;font-size: 25px;width: 50px;width: 35px;border-radius: 50%;"
+               onclick="
+               document.getElementById('infra').style.display='none'
+               document.getElementById('infi').setAttribute('src','https://img.pngio.com/shopping-mall-png-6-png-image-png-shopping-mall-213_173.png')
+               document.getElementById('inft').innerHTML='Shopping Mall'
+               document.getElementById('infa').innerHTML='Here, people buy their essentials.<bR>Build more of these to increase your city reputation.'
+               document.getElementById('infc').innerHTML='1 Shopping Mall = +10% reputation'
+               document.getElementById('infobox').style.display='block'">i</button>
+            <div class="schools"
+               onclick="
+               buildIt('Shopping Mall',10000,'coins',10,'m')
+               ">
+               <label style="font-size: 22.5;font-weight: 700;">Shopping Mall</label><br>
+               <img class="bing" src="https://img.pngio.com/shopping-mall-png-6-png-image-png-shopping-mall-213_173.png">
+               <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 10000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+            </div>
+            <br>
+            <button style="float:right;background-color: red;border:3px solid black;color: white;font-size: 25px;width: 50px;width: 35px;border-radius: 50%;"
+               onclick="
+               document.getElementById('infra').style.display='none'
+               document.getElementById('infi').setAttribute('src','https://i.pinimg.com/736x/77/7d/9c/777d9c6e187bfc29677c7de89aa73c5a.jpg')
+               document.getElementById('inft').innerHTML='Shopping Mall'
+               document.getElementById('infa').innerHTML='Here, people buy their essentials.<bR>Build more of these to increase your city reputation.'
+               document.getElementById('infc').innerHTML='1 Shopping Mall = +10% reputation'
+               document.getElementById('infobox').style.display='block'">i</button>
+            <div class="schools"
+               onclick="
+               buildIt('Restaurant',5000,'coins',5,'m')
+               ">
+               <label style="font-size: 22.5;font-weight: 700;">Restaurant</label><br>
+               <img class="bing" src="https://i.pinimg.com/736x/77/7d/9c/777d9c6e187bfc29677c7de89aa73c5a.jpg">
+               <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 5000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:5m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+            </div>
+            <br>
+            <button style="float:right;background-color: red;border:3px solid black;color: white;font-size: 25px;width: 50px;width: 35px;border-radius: 50%;">i</button>
+            <div class="schools"
+               onclick="
+               buildIt('Amusement Park',7500,'coins',10,'m')
+               ">
+               <label style="font-size: 22.5;font-weight: 700;">Amusement Park</label><br>
+               <img class="bing" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQhzz18AbGnoZdOEzmuNjOR894NWQxSoH6ICNvMWRZyyEKYNQQ5ppHhOc9b6mNe1WIAWs&usqp=CAU">
+               <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 7500</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+            </div>
+            <br>
+            <button style="float:right;background-color: red;border:3px solid black;color: white;font-size: 25px;width: 50px;width: 35px;border-radius: 50%;">i</button>
+            <div class="schools"
+               onclick="
+               buildIt('Factory',25000,'coins',30,'m')
+               ">
+               <label style="font-size: 22.5;font-weight: 700;">Factory</label><br>
+               <img class="bing" src="https://www.seekpng.com/png/detail/401-4012929_factory-clipart-transparent-building-factory-building-factory-cartoon.png">
+               <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 25000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:30m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+            </div>
+            <br>  
+            <button style="font-size:30px;position: absolute;bottom: 10px;right:20px;background:none;border: none;position: fixed;" onclick="
+               document.getElementById('options').style.display='block';
+               document.getElementById('infra').style.display='none';">🔙</button>
+         </div>
+      </div>
+      <div class="resources" id="resources" style="display: none;">
+         <h2>Your Resources: </h2>
+         <div class="huts">
+            <label style="font-size: 22.5;font-weight: 700;">Gold Mine</label><br>
+            <img class="bing" src="http://airheadanimation.co.uk/wp-content/uploads/2016/12/Content-Goldmine.png">
+            <div><label style="font-weight: 700; color:lime">Gems: 100</label><img style="margin-bottom: -10px;" src="https://pics.clipartpng.com/midle/Emerald_Gem_PNG_Clipart-791.png" width=35><label style="margin-left: 20px;">Time:5m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+         </div>
+         <br>
+         <div class="huts">
+            <label style="font-size: 22.5;font-weight: 700;">Gem Mine</label><br>
+            <img class="bing" src="https://www.pngkit.com/png/full/127-1271167_vector-isometric-illustration-coal-mining-quarry-work-coal.png">
+            <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 30000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:15m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+         </div>
+         <br>
+         <button style="font-size:30px;position: absolute;bottom: 10px;right:20px;background:none;border: none;position: fixed;" onclick="
+            document.getElementById('options').style.display='block';
+            document.getElementById('resources').style.display='none';">🔙</button>
+      </div>
+      <div class="contain" id="main">
+         <h1>
+            Welcome To Your 
+            <div><img style="margin-bottom: -10px;margin-right: 10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=35>Smart City<img style="margin-bottom: -7.5px; margin-left: 10px;" src="https://pics.clipartpng.com/midle/Emerald_Gem_PNG_Clipart-791.png" width=40>
+            </div>
+         </h1>
+         <div id="nameinp" style="display: none;margin-top: -20px;margin-bottom: -10px;"><label >Enter Your Name: </label><input id="name" style="width:40%;"><button id="submit" style="margin-left: 5px;background:rgb(155, 0, 155);color:white;padding: 2px;">Ok</button></div>
+         <div id="nameshow"><label class="h1">Dear, </label><label class="h1" id="Name"></label></div>
+         <Br>
+         <div class="buttons">
+            <img class=start src="https://images.squarespace-cdn.com/content/v1/54b9401be4b095413a52aaa8/1581444428723-P0TJO2CEDSN21QEXD9NO/ke17ZwdGBToddI8pDm48kFQQgP34qnCpeHaeAOzTt7pZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIvwpK0aFuhG0GtLLHqvbV4raqY38tdDiF-KTEvoUH9G4/United+Nations+Illustration+by+DKNG">
+            <br><br><button onclick="
+               document.getElementById('main').style.display='none';
+               document.getElementById('options').style.display='block';"><img src="https://img.icons8.com/plasticine/2x/building.png" width="30px" style="float: left;"> <img src="https://img.icons8.com/plasticine/2x/building.png" width="30px" style="float: right;"> Go To City</button>
+            <br><button> See Instructions</button>
+            <br><button onclick="
+               document.getElementById('main').style.display='none';
+               document.getElementById('settings').style.display='block';"
+               ><img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Settings-icon.png" width="30px" style="float:right"> <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Settings-icon.png" width="30px" style="float:left"> Settings</button>
+         </div>
+      </div>
+      <script>
+         if(getCookie("Name")===""){
+           document.getElementById("nameinp").style.display="block";
+           document.getElementById("nameshow").style.display="none";
+         }
+         else{
+           document.getElementById("nameinp").style.display="none";
+           document.getElementById("Name").innerText=getCookie("Name")+"🎉"
+          
+           
+         }
+         document.getElementById("submit").addEventListener("click",function(){
+           var username=document.getElementById("name").value;
+           setCookie("Name",username,35600);
+           setCookie("Level",1,35600);
+           setCookie("Coins",5000,35600);
+           setCookie("Gems",200,35600);
+         
+           database = firebase.database()
+           database.ref("/"+username).set({
+             Name : username,
+           })
+           database.ref("/"+username+"Lvl").set({
+             Level : 1,
+           })
+         setTimeout(() => {
+         location.reload()
+         }, 2000);
+         })
+         
+      </script>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script>
+         // Your web app's Firebase configuration
+         var firebaseConfig = {
+           apiKey: "AIzaSyAcKiUxD2RdT7T-U1SLqK7NvSt3qXDVnSM",
+           authDomain: "smart-city-18e4b.firebaseapp.com",
+           projectId: "smart-city-18e4b",
+           storageBucket: "smart-city-18e4b.appspot.com",
+           messagingSenderId: "1066519753510",
+           appId: "1:1066519753510:web:61705c4bdf875018bfc7e7"
+         };
+         // Initialize Firebase
+         firebase.initializeApp(firebaseConfig);
+      </script>
+      <script>
+         function buildIt(type,money,mont,time,tity){
+         if(getCookie("Coins")>=money){
+         choice=confirm("Do You Want To Build A "+type+" For "+money+" "+mont+" ?")
+         if(choice===true){
+           var nob;
+           if(getCookie(type+"s")===""){
+            nob=0;
+           }
+           else{
+           nob=parseInt(getCookie(type+"s"))
+           }
+          setCookie(type+"s",nob+1,35600);
+         if(mont==="coins"){
+         setCookie("Coins",getCookie("Coins")-money,35600);
+         document.getElementById('ucoins').innerHTML="Coins: "+getCookie('Coins');
+         }
+         else if(mont==="gems"){
+         setCookie("Gems",getCookie("Gems")-money,35600);
+         document.getElementById('ugems').innerHTML="Gems: "+getCookie('Gems');
+         
+         }
+         if(tity==="s"){
+          setCookieS("NoBuild",true,time)
+          setCookieS("Current_Build",type,time);
+          go = new Date();
+          go=go.getTime()+(time*1000);
+          setCookieS("Current_BT",go,time);
+         }
+         else if(tity==="m"){
+          setCookieM("NoBuild",true,time)
+          setCookieM("Current_Build",type,time);
+          go = new Date();
+          go=go.getTime()+(time*60000);
+          setCookieM("Current_BT",go,time);
+         }
+         else if(tity==="h"){
+          setCookieH("NoBuild",true,time)
+          setCookieH("Current_Build",type,time);
+          go = new Date();
+          go=go.getTime()+(time*3600000);
+          setCookieH("Current_BT",go,time);
+          }
+          
+          document.getElementById("infra").style.display="none";
+         document.getElementById("NoBuild").style.display="block";
+         }
+         }
+         else{
+         if(mont==="coins"){
+         alert("You are short Of "+(money-getCookie("Coins")).toString()+" Coins to build A "+type+" !");
+         }
+         else if(mont==="gems"){ 
+         alert("You are short Of "+(money-getCookie("Gems")).toString()+" Gems to build A "+type+" !");
+         }
+         }
+         }
+         
+         setInterval(function(){
+           document.getElementById('curbuild').innerHTML=getCookie("Current_Build")
+         
+           if(((getCookie('Current_BT')-new Date().getTime())/1000)<60&&((getCookie('Current_BT')-new Date().getTime())/1000)>0){
+           document.getElementById('curbuildt').innerHTML=Math.round((getCookie('Current_BT')-new Date().getTime())/1000)
+           document.getElementById('curbuildt').innerHTML+=" seconds"
+           }
+           else if(((getCookie('Current_BT')-new Date().getTime())/1000)>60){
+             minutes = Math.round((getCookie('Current_BT')-new Date().getTime())/60000)
+           document.getElementById('curbuildt').innerHTML=minutes+" minutes "
+           }
+           else if(((getCookie('Current_BT')-new Date().getTime())/1000)<=0&&document.getElementById("NoBuild").style.display==="block"){
+         document.getElementById("infra").style.display="block";
+         document.getElementById("NoBuild").style.display="none";
+           }
+           if(getCookie("Current_Build")==="House"){
+         document.getElementById("BuildImage").setAttribute('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR10GeCbuJF_PsJRj-VintNE-d8BxHvkehHrQ&usqp=CAU')
+           }
+           else if(getCookie("Current_Build")==="School"){
+         document.getElementById("BuildImage").setAttribute('src','https://www.seekpng.com/png/full/23-239023_get-started-with-eschool-plus-app-try-free.png')
+           }
+           else if(getCookie("Current_Build")==="Restaurant"){
+         document.getElementById("BuildImage").setAttribute('src','https://i.pinimg.com/736x/77/7d/9c/777d9c6e187bfc29677c7de89aa73c5a.jpg')
+           }
+           else if(getCookie("Current_Build")==="Shopping Mall"){
+         document.getElementById("BuildImage").setAttribute('src','https://img.pngio.com/shopping-mall-png-6-png-image-png-shopping-mall-213_173.png')
+           }
+           else if(getCookie("Current_Build")==="Amusement Park"){
+         document.getElementById("BuildImage").setAttribute('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQhzz18AbGnoZdOEzmuNjOR894NWQxSoH6ICNvMWRZyyEKYNQQ5ppHhOc9b6mNe1WIAWs&usqp=CAU')
+           }
+           else if(getCookie("Current_Build")==="Factory"){
+         document.getElementById("BuildImage").setAttribute('src','https://www.seekpng.com/png/detail/401-4012929_factory-clipart-transparent-building-factory-building-factory-cartoon.png')
+           }
+           
+         },1000)
+      </script>
+   </body>
+</html>

@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure</title>
+    <style>
+      .bing{
+        width: 200px;
+        height: 150px;
+        border: 10px double black;
+      }
+    </style>
+    <script>
+        function setCookie(cname,cvalue,exdays) {
+   var d = new Date();
+   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+   var expires = "expires=" + d.toGMTString();
+   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+ }
+ 
+ function getCookie(cname) {
+   var name = cname + "=";
+   var decodedCookie = decodeURIComponent(document.cookie);
+   var ca = decodedCookie.split(';');
+   for(var i = 0; i < ca.length; i++) {
+     var c = ca[i];
+     while (c.charAt(0) == ' ') {
+       c = c.substring(1);
+     }
+     if (c.indexOf(name) == 0) {
+       return c.substring(name.length, c.length);
+     }
+   }
+   return "";
+ }
+ song = new Audio(getCookie('music'))
+song.play();
+song.loop=true;
+   </script>
+</head>
+<body>
+    <h2>Buildings, You can build:</h2>
+    <div class="huts">
+    <label style="font-size: 22.5;font-weight: 700;">House</label><br>
+    <img class="bing" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR10GeCbuJF_PsJRj-VintNE-d8BxHvkehHrQ&usqp=CAU">
+    <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 1000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10s</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+    </div>
+    <br>
+    <div class="schools">
+      <label style="font-size: 22.5;font-weight: 700;">School</label><br>
+      <img class="bing" src="https://www.seekpng.com/png/full/23-239023_get-started-with-eschool-plus-app-try-free.png">
+    <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 2500</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:1m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+    </div>
+    <br>
+
+    <div class="schools">
+      <label style="font-size: 22.5;font-weight: 700;">Shopping Mall</label><br>
+      <img class="bing" src="https://img.pngio.com/shopping-mall-png-6-png-image-png-shopping-mall-213_173.png">
+    <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 10000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+    </div>
+    <br>
+    
+    <div class="schools">
+      <label style="font-size: 22.5;font-weight: 700;">Restaurant</label><br>
+      <img class="bing" src="https://i.pinimg.com/736x/77/7d/9c/777d9c6e187bfc29677c7de89aa73c5a.jpg">
+    <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 5000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:5m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+    </div>
+    <br>
+    
+    <div class="schools">
+      <label style="font-size: 22.5;font-weight: 700;">Amusement Park</label><br>
+      <img class="bing" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQhzz18AbGnoZdOEzmuNjOR894NWQxSoH6ICNvMWRZyyEKYNQQ5ppHhOc9b6mNe1WIAWs&usqp=CAU">
+    <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 7500</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+    </div>
+    <br>
+    
+    <div class="schools">
+      <label style="font-size: 22.5;font-weight: 700;">Factory</label><br>
+      <img class="bing" src="https://www.seekpng.com/png/detail/401-4012929_factory-clipart-transparent-building-factory-building-factory-cartoon.png">
+    <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 25000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:30m</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+    </div>
+    <br>  
+    <h2>Infrastructure for Resources</h2>
+    <div class="huts">
+      <label style="font-size: 22.5;font-weight: 700;">Gold Mine</label><br>
+      <img class="bing" src="https://static.wikia.nocookie.net/riseofcivilizations/images/2/26/Building_Goldmine_1_5.png/revision/latest?cb=20181114153920">
+      <div><label style="font-weight: 700; color:rgb(255, 208, 0)">Coins: 1000</label><img style="margin-bottom: -10px;" src="https://image.freepik.com/free-vector/gold-coin_92172-91.jpg" width=30><label style="margin-left: 20px;">Time:10s</label><img style="margin-bottom: -10px;" src="https://purepng.com/public/uploads/large/purepng.com-black-wall-clockelectronicsclock-watch-wall-clock-time-941524679024ystkb.png" width=30></div>
+      </div>
+      <br>
+</body>
+</html>
